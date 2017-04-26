@@ -34,12 +34,45 @@ public class MergeSort {
         return result;
     }
 
-    public static void main(String[] args){
-        System.out.println("Test");
-        int[] one = {1,1,2,4,6,9};
-        int[] two = {0,3,6,8,9};
+    public static int[] MergeSort(int[] input){
+        if(input.length < 2){
+            return input;
+        }
+        int middle;
+        int[] left;
+        int[] right;
+        if(input.length%2 == 0){
+            middle = input.length/2;
+            left = new int[middle];
+            right = new int[middle];
+        } else{
+            middle = (input.length-1)/2;
+            left = new int[middle];
+            right = new int[middle + 1];
+        }
+        for(int i=0; i<input.length; i++){
+            if(i < middle){
+                left[i] = input[i];
+            } else{
+                right[i-middle] = input[i];
+            }
+        }
+        int[] result = Merge(MergeSort(left), MergeSort(right));
+        return result;
+    }
 
-        System.out.println("Merged arrays: " + Arrays.toString(Merge(one, two)));
+    public static void main(String[] args){
+        int[] test1 = {0,4,5,2,4,1,3,5,3,1,0,0,99};
+        System.out.println(Arrays.toString(MergeSort(test1)));
+
+        int[] test2 = {};
+        System.out.println(Arrays.toString(MergeSort(test2)));
+
+        int[] test3 = {0,1,2,3,4,5};
+        System.out.println(Arrays.toString(MergeSort(test3)));
+
+        int[] test4 = {5,4,3,2,1,0};
+        System.out.println(Arrays.toString(MergeSort(test4)));
 
     }
 }
