@@ -8,14 +8,19 @@ import java.util.*;
 public class QuickSort {
 
     public static int[] QuickSort(int[] input){
+        // base case return single (sorted) or empty array
         if(input.length <2){
             return input;
         }
 
+        // save pivot value
         int pivotValue = input[input.length-1];
+
+        // create unknown length array lists for left and right partitions
         ArrayList<Integer> left = new ArrayList<Integer>();
         ArrayList<Integer> right = new ArrayList<Integer>();
 
+        // add to left or right dependent on lower or higher than pivot, respectively
         for(int i=0; i<input.length-1; i++){
             if(input[i] < pivotValue){
                 left.add(input[i]);
@@ -24,6 +29,7 @@ public class QuickSort {
             }
         }
 
+        // convert from array lists to int arrays
         int[] leftArr = new int[left.size()];
         int[] rightArr = new int[right.size()];
 
@@ -34,32 +40,34 @@ public class QuickSort {
         for(int i=0; i<right.size(); i++){
             rightArr[i] = right.get(i);
         }
-//        System.out.println("Input: " + Arrays.toString(input));
-//        System.out.println("Left: " + Arrays.toString(leftArr));
-//        System.out.println("Right: " + Arrays.toString(rightArr));
-//        System.out.println("");
 
+        // recursively partition and sort
         int[] leftResult = QuickSort(leftArr);
         int[] rightResult = QuickSort(rightArr);
 
-//        System.out.println("LeftResult: " + Arrays.toString(leftResult));
-//        System.out.println("RightResult: " + Arrays.toString(rightResult));
-
+        // build final sorted array
         int[] result = new int[input.length];
 
+        // init result array iterator
         int resultIter = 0;
 
+        // add left (lower) side
         for(int i=0; i<leftResult.length; i++){
             result[resultIter] = leftResult[i];
             resultIter++;
         }
+
+        // add pivot value
         result[resultIter] = pivotValue;
         resultIter++;
+
+        // add right (higher) side
         for(int i=0; i<rightResult.length; i++){
             result[resultIter] = rightResult[i];
             resultIter++;
         }
 
+        // return sorted array
         return result;
 
     }
