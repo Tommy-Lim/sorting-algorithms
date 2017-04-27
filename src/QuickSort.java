@@ -34,10 +34,10 @@ public class QuickSort {
         for(int i=0; i<right.size(); i++){
             rightArr[i] = right.get(i);
         }
-        System.out.println("Input: " + Arrays.toString(input));
-        System.out.println("Left: " + Arrays.toString(leftArr));
-        System.out.println("Right: " + Arrays.toString(rightArr));
-        System.out.println("");
+//        System.out.println("Input: " + Arrays.toString(input));
+//        System.out.println("Left: " + Arrays.toString(leftArr));
+//        System.out.println("Right: " + Arrays.toString(rightArr));
+//        System.out.println("");
 
         int[] leftResult = QuickSort(leftArr);
         int[] rightResult = QuickSort(rightArr);
@@ -47,15 +47,17 @@ public class QuickSort {
 
         int[] result = new int[input.length];
 
-        for(int i=0; i<result.length; i++){
-            int j =0;
-            if(i < leftResult.length){
-                result[i] = leftResult[i];
-            } else if(i == leftResult.length){
-                result[i] = pivotValue;
-            } else{
-                result[i] = rightResult[j++];
-            }
+        int resultIter = 0;
+
+        for(int i=0; i<leftResult.length; i++){
+            result[resultIter] = leftResult[i];
+            resultIter++;
+        }
+        result[resultIter] = pivotValue;
+        resultIter++;
+        for(int i=0; i<rightResult.length; i++){
+            result[resultIter] = rightResult[i];
+            resultIter++;
         }
 
         return result;
@@ -66,13 +68,13 @@ public class QuickSort {
         int[] test1 = {0,4,5,2,4,1,3,5,3,1,0,0,99};
         System.out.println(Arrays.toString(QuickSort(test1)));
 
-//        int[] test2 = {};
-//        System.out.println(Arrays.toString(QuickSort(test2)));
-//
-//        int[] test3 = {0,1,2,3,4,5};
-//        System.out.println(Arrays.toString(QuickSort(test3)));
-//
-//        int[] test4 = {5,4,3,2,1,0};
-//        System.out.println(Arrays.toString(QuickSort(test4)));
+        int[] test2 = {};
+        System.out.println(Arrays.toString(QuickSort(test2)));
+
+        int[] test3 = {0,1,2,3,4,5};
+        System.out.println(Arrays.toString(QuickSort(test3)));
+
+        int[] test4 = {5,4,3,2,1,0};
+        System.out.println(Arrays.toString(QuickSort(test4)));
     }
 }
